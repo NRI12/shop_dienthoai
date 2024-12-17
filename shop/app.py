@@ -19,12 +19,13 @@ logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='a',
                 format='%(name)s - %(levelname)s - %(message)s')
 
 
-model = load_model(r'C:\Users\pc\Desktop\shop_new\shop\model\tuned_model_new')
+model_path = os.path.join(os.path.dirname(__file__), 'model', 'tuned_model_new')
+model = load_model(model_path)
 
 app = Flask(__name__)
 app.jinja_env.filters['star_rating'] = star_rating
 app.config['SECRET_KEY'] = 'your_secret_key_here'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost:3306/new_database'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@database-2.czia64cy4ba2.us-east-1.rds.amazonaws.com:3306/new_database'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
