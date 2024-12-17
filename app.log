@@ -2453,3 +2453,128 @@ werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 20:04:05] "[36mGET /static/img/com
 werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 20:04:05] "[36mGET /static/img/company/HTC.jpg HTTP/1.1[0m" 304 -
 werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 20:04:05] "[36mGET /static/img/company/Philips.jpg HTTP/1.1[0m" 304 -
 werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 20:04:05] "[36mGET /static/img/company/Samsung.jpg HTTP/1.1[0m" 304 -
+werkzeug - INFO -  * Restarting with windowsapi reloader
+werkzeug - WARNING -  * Debugger is active!
+werkzeug - INFO -  * Debugger PIN: 163-668-993
+werkzeug - INFO -  * Running on http://127.0.0.1:4444/ (Press CTRL+C to quit)
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\base.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\reflection.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\enumerated.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\types.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\json.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\cymysql.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\mysqldb.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\gaerdbms.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\mysqlconnector.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\oursql.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\pymysql.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\pyodbc.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\connectors\\__pycache__\\pyodbc.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\zxjdbc.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\__pycache__\\dml.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\util\\_collections.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask\\app.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask\\_compat.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\werkzeug\\local.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask_login\\utils.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask_login\\login_manager.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\flask_sqlalchemy\\__init__.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\orm\\scoping.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\orm\\session.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\engine\\__init__.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\engine\\strategies.py', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\sqlalchemy\\dialects\\mysql\\pymysql.py', reloading
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:52:06] "[1m[35mGET /home HTTP/1.1[0m" 500 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:52:06] "[97mGET /home?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:52:06] "[97mGET /home?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:52:06] "[97mGET /home?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:52:06] "[97mGET /home?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:52:06] "[97mGET /home?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:52:06] "[97mGET /home?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+werkzeug - INFO -  * Restarting with windowsapi reloader
+werkzeug - WARNING -  * Debugger is active!
+werkzeug - INFO -  * Debugger PIN: 163-668-993
+werkzeug - INFO -  * Running on http://127.0.0.1:4444/ (Press CTRL+C to quit)
+werkzeug - INFO -  * Restarting with windowsapi reloader
+werkzeug - WARNING -  * Debugger is active!
+werkzeug - INFO -  * Debugger PIN: 163-668-993
+werkzeug - INFO -  * Running on http://127.0.0.1:4444/ (Press CTRL+C to quit)
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\__pycache__\\utils.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\__pycache__\\__about__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\backends\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\serialization\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\__pycache__\\_serialization.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\__pycache__\\hashes.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\bindings\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\serialization\\__pycache__\\base.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\serialization\\__pycache__\\ssh.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\__pycache__\\exceptions.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\__pycache__\\dsa.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\__pycache__\\utils.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\__pycache__\\ec.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\__pycache__\\_oid.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\__pycache__\\ed25519.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\__pycache__\\padding.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\__pycache__\\_asymmetric.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\asymmetric\\__pycache__\\rsa.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\ciphers\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\__pycache__\\_cipheralgorithm.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\ciphers\\__pycache__\\base.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\ciphers\\__pycache__\\modes.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\primitives\\ciphers\\__pycache__\\algorithms.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\decrepit\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\decrepit\\ciphers\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\cryptography\\hazmat\\decrepit\\ciphers\\__pycache__\\algorithms.cpython-311.pyc', reloading
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages\\bcrypt\\__pycache__\\__init__.cpython-311.pyc', reloading
+werkzeug - INFO -  * Restarting with windowsapi reloader
+werkzeug - WARNING -  * Debugger is active!
+werkzeug - INFO -  * Debugger PIN: 163-668-993
+werkzeug - INFO -  * Running on http://127.0.0.1:4444/ (Press CTRL+C to quit)
+werkzeug - INFO -  * Detected change in 'C:\\Users\\pc\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\encodings\\__pycache__\\unicode_escape.cpython-311.pyc', reloading
+werkzeug - INFO -  * Restarting with windowsapi reloader
+werkzeug - WARNING -  * Debugger is active!
+werkzeug - INFO -  * Debugger PIN: 163-668-993
+werkzeug - INFO -  * Running on http://127.0.0.1:4444/ (Press CTRL+C to quit)
+werkzeug - INFO -  * Restarting with windowsapi reloader
+werkzeug - WARNING -  * Debugger is active!
+werkzeug - INFO -  * Debugger PIN: 163-668-993
+werkzeug - INFO -  * Running on http://127.0.0.1:4444/ (Press CTRL+C to quit)
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:10] "[33mGET / HTTP/1.1[0m" 404 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:25] "[97mGET /home HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:46] "[97mGET /home HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:47] "[97mGET /static/js/owlcarousel/owl.theme.default.min.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:47] "[97mGET /static/js/owlcarousel/owl.carousel.min.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:47] "[97mGET /static/css/banner.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:47] "[97mGET /static/css/trangchu.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:48] "[97mGET /static/css/home_products.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:48] "[97mGET /static/css/chitietsanpham.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:48] "[97mGET /static/css/pagination_phantrang.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:48] "[33mGET /static/css/topnav.css HTTP/1.1[0m" 404 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:48] "[97mGET /static/css/header.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:48] "[97mGET /static/css/nguoidung.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:48] "[97mGET /static/css/footer.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:48] "[97mGET /static/css/style.css HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/js/main.js HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/logo.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/banners/blackFriday.gif HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/js/owlcarousel/owl.carousel.min.js HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/company/Apple.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/company/Samsung.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/company/Oppo.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/company/Nokia.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/company/Xiaomi.png HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/company/Huawei.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/company/Coolpad.png HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:49] "[97mGET /static/img/company/HTC.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:50] "[97mGET /static/img/company/Vivo.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:50] "[97mGET /static/img/company/Mobell.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:50] "[97mGET /static/img/company/Philips.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:50] "[97mGET /static/img/company/Itel.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:50] "[97mGET /static/img/company/Mobiistar.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:50] "[97mGET /static/img/company/Motorola.jpg HTTP/1.1[0m" 200 -
+werkzeug - INFO - 127.0.0.1 - - [17/Dec/2024 21:53:50] "[97mGET /static/img/company/Realme.png HTTP/1.1[0m" 200 -

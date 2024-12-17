@@ -18,9 +18,6 @@ logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='a',
                 format='%(name)s - %(levelname)s - %(message)s')
 
 
-model_path = os.path.join(os.path.dirname(__file__), 'model', 'tuned_model_new')
-model = load_model(model_path)
-
 app = Flask(__name__)
 app.jinja_env.filters['star_rating'] = star_rating
 app.config['SECRET_KEY'] = 'your_secret_key_here'
@@ -623,100 +620,15 @@ def get_reviews():
     per_page = 10
     reviews_pagination = Rating.query.paginate(page=page, per_page=per_page, error_out=False)
 
-    reviews_data = pd.DataFrame([{'Review': review.comment, 'User': review.user.username} for review in reviews_pagination.items])
+    reviews_data = [{'Review': review.comment, 'User': review.user.username} for review in reviews_pagination.items]
 
-    predictions = predict_model(model, data=reviews_data)
-    predicted_reviews = predictions[['Review', 'User', 'prediction_label', 'prediction_score']].to_dict(orient='records')
-    
-    # Wrap in a structure that includes a 'reviews' key
     response = {
-        'reviews': predicted_reviews,
+        'reviews': reviews_data,
         'has_more': reviews_pagination.has_next  # This can be used to manage pagination controls
     }
     
     return jsonify(response)
 from sqlalchemy.orm import joinedload
-
-@app.route('/api/negative_reviews_summary', methods=['GET'])
-def negative_reviews_summary():
-    # Fetch all ratings with related product data
-    ratings = Rating.query.options(joinedload(Rating.product)).all()
-    
-    # Convert reviews into DataFrame for prediction
-    reviews_data = pd.DataFrame([{
-        'Review': rating.comment,
-        'ProductID': rating.product_id,
-        'ProductName': rating.product.name  # Accessing the related product's name directly
-    } for rating in ratings])
-
-    # Predict sentiments
-    predictions = predict_model(model, data=reviews_data)
-    predictions['IsNegative'] = predictions['prediction_label'].apply(lambda x: 1 if x == 1 else 0)
-
-    # Calculate negative review ratios
-    summary = predictions.groupby(['ProductID', 'ProductName']).agg(
-        TotalReviews=('ProductName', 'size'),
-        NegativeReviews=('IsNegative', 'sum')
-    ).reset_index()
-
-    summary['NegativeReviewRatio'] = (summary['NegativeReviews'] / summary['TotalReviews']) * 100  # Multiply by 100 for percentage
-
-    # Sort by highest ratio of negative reviews and return top 5
-    top_negative = summary.sort_values(by='NegativeReviewRatio', ascending=False).head(5)
-
-    # Convert to a JSON-friendly format
-    top_negative_summary = [{
-        'ProductID': row['ProductID'],  # Include ProductID here
-        'ProductName': row['ProductName'],
-        'TotalReviews': row['TotalReviews'],
-        'NegativeReviews': row['NegativeReviews'],
-        'NegativeReviewRatio': f"{row['NegativeReviewRatio']:.2f}"
-    } for index, row in top_negative.iterrows()]
-
-    print(top_negative_summary)    
-    return jsonify(top_negative_summary)
-@app.route('/api/negative_review_users', methods=['GET'])
-def negative_review_users():
-    # Fetch all ratings with related user data
-    ratings = Rating.query.join(User).options(joinedload(Rating.user)).all()
-    
-    # Convert reviews into DataFrame for prediction
-    reviews_data = pd.DataFrame([{
-        'Review': rating.comment,
-        'UserID': rating.user_id,
-        'UserName': rating.user.username  # Accessing the related user's name directly
-    } for rating in ratings])
-
-    # Predict sentiments
-    predictions = predict_model(model, data=reviews_data)
-    predictions['IsNegative'] = predictions['prediction_label'].apply(lambda x: 1 if x == 1 else 0)
-
-    # Filter predictions with prediction_score >= 0.80
-    predictions = predictions[predictions['prediction_score'] >= 0.80]
-
-    # Calculate negative review ratios
-    user_summary = predictions.groupby(['UserID', 'UserName']).agg(
-        TotalComments=('UserName', 'size'),
-        NegativeComments=('IsNegative', 'sum')
-    ).reset_index()
-
-    user_summary['NegativeCommentRatio'] = (user_summary['NegativeComments'] / user_summary['TotalComments']) * 100
-
-    # Sort by highest ratio of negative comments and return top 5
-    top_negative_users = user_summary.sort_values(by='NegativeCommentRatio', ascending=False).head(5)
-
-    # Convert to a JSON-friendly format
-    top_negative_users_summary = [{
-        'UserID': row['UserID'],
-        'UserName': row['UserName'],
-        'TotalComments': row['TotalComments'],
-        'NegativeComments': row['NegativeComments'],
-        'NegativeCommentRatio': f"{row['NegativeCommentRatio']:.2f}"
-    } for index, row in top_negative_users.iterrows()]
-
-    print(top_negative_users_summary)    
-    return jsonify(top_negative_users_summary)
-
 @app.route('/api/lock_user/<int:user_id>', methods=['POST'])
 def lock_user(user_id):
     user = User.query.get(user_id)
