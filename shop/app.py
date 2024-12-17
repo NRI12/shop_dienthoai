@@ -11,7 +11,6 @@ from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 import logging
 from werkzeug.utils import secure_filename
-from pycaret.classification import load_model, predict_model
 import pandas as pd
 from sqlalchemy.orm import joinedload
 
