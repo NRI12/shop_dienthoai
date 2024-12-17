@@ -1,0 +1,116 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<section class="container mt-4">
+    {% include 'header.html' %}
+    <img src="{{ url_for('static', filename='img/banners/blackFriday.gif') }}" alt="" class="img-fluid">
+
+    <div class="infoUser mt-4">
+        <div class="card">
+            <div class="card-header">
+                Thông Tin Khách Hàng
+				<button id="editUserInfo" class="btn btn-outline-secondary btn-sm" onclick="toggleEdit(true)">
+					<i class="fa fa-pencil-alt"></i>
+				</button>
+            </div>
+            <div class="card-body">
+                <form id="userInfoForm">
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Tài khoản:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="username" value="{{ user.username }}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Họ tên:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="fullName" value="{{ user.full_name }}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Email:</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control" id="email" value="{{ user.email }}" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Số điện thoại:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="phoneNumber" value="{{ user.phone_number }}" disabled>
+                        </div>
+                    </div>
+					<div class="form-group row">
+						<label class="col-sm-3 col-form-label">Địa chỉ:</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="address" value="{{ user.address }}" disabled>
+						</div>
+					</div>					
+                    <div class="form-group row">
+                        <div class="col-sm-12 text-right">
+                            <button type="submit" class="btn btn-primary" style="display: none;" id="saveChanges">Lưu thay đổi</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="user-orders mt-4">
+        <h2>Đơn hàng của bạn</h2>
+        <table class="table table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID đơn hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Địa chỉ</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Chi tiết</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.order_date }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.total | format_currency }}</td>
+                    <td>{{ order.status }}</td>
+                    <td><button class="btn btn-info" data-toggle="collapse" data-target="#orderDetails{{ order.id }}">Xem chi tiết</button></td>
+                    <td>
+                        {% if order.status == 'processing' %}
+                            <button class="btn btn-danger" onclick="cancelOrder({{ order.id }})">Hủy</button>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr id="orderDetails{{ order.id }}" class="collapse">
+                    <td colspan="7">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá</th>
+                                    <th>Ảnh</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for detail in order.order_details %}
+                                <tr>
+                                    <td>{{ detail.product.name }}</td>
+                                    <td>{{ detail.quantity }}</td>
+                                    <td>{{ detail.price | format_currency }}</td>
+                                    <td><img src="{{ detail.product.images[0].url if detail.product.images else 'path_to_default_image' }}" alt="{{ detail.product.name }}" style="width: 100px;"></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>

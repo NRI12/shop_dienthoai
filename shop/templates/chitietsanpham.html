@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ product.name }} - Thế giới điện thoại</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}"/>
+
+    <!-- Load font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+
+    <!-- FancyBox CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topnav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/taikhoan.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/trangchu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home_products.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chitietsanpham.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- FancyBox JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <section>
+		{% include 'header.html' %}
+        <div class="chitietSanpham" style="margin-bottom: 100px">
+            <h1>Điện thoại {{ product.name }}</h1>
+            <div class="rating">{{ avg_rating|star_rating(review_count)|safe }}</div>
+            <div class="rowdetail group">
+                <div class="picture">
+                    <a data-fancybox="gallery" href="{{ images[0].url if images else url_for('static', filename='url_to_default_image') }}">
+                        <img src="{{ images[0].url if images else url_for('static', filename='url_to_default_image') }}" alt="{{ product.name }}">
+                    </a>
+                    <!-- Hidden links to create the gallery -->
+                    {% for img in images[1:] %}
+                        <a data-fancybox="gallery" href="{{ img.url }}" style="display: none;">
+                            <img src="{{ img.url }}" alt="{{ product.name }}">
+                        </a>
+                    {% endfor %}
+                </div>
+                <div class="price_sale">
+                    <div class="area_price">
+                        {% if discount_amount > 0 %}
+                            <span style="text-decoration: line-through;">{{ product.price | format_currency }} đ</span>
+                            <strong>{{ discounted_price | format_currency }} đ</strong>
+                        {% else %}
+                            <strong>{{ product.price | format_currency }} đ</strong>
+                        {% endif %}
+                    </div>
+                    <div class="ship" style="display: none;">
+                        <img src="{{ url_for('static', filename='img/chitietsanpham/clock-152067_960_720.png') }}">
+                        <div>NHẬN HÀNG TRONG 1 GIỜ</div>
+                    </div>
+                    <div class="area_promo">
+                        <strong>Khuyến mãi</strong>
+                        <div class="promo">
+                            <img src="{{ url_for('static', filename='img/chitietsanpham/icon-tick.png') }}">
+                            <div id="detailPromo">{{ product.promotion_text if product.promotion_text else 'Không có khuyến mãi' }}</div>
+                        </div>
+                    </div>
+                    <div class="www" style="display: none;">
+                        <div>product.description</div>
+                    </div>
+                    <div class="policy">
+                        <div>
+                            <img src="{{ url_for('static', filename='img/chitietsanpham/box.png') }}">
+                            <p>Trong hộp có: Sạc, Tai nghe, Sách hướng dẫn, Cây lấy sim, Ốp lưng </p>
+                        </div>
+                        <div>
+                            <img src="{{ url_for('static', filename='img/chitietsanpham/icon-baohanh.png') }}">
+                            <p>Bảo hành chính hãng 12 tháng.</p>
+                        </div>
+                        <div class="last">
+                            <img src="{{ url_for('static', filename='img/chitietsanpham/1-1.jpg') }}">
+                            <p>1 đổi 1 trong 1 tháng nếu lỗi, đổi sản phẩm tại nhà trong 1 ngày.</p>
+                        </div>
+                    </div>
+                    <div class="area_order">
+                        <a class="buy_now" onclick="addToCartFromElement(this)"
+                           data-product-id="{{ product.id }}"
+                           data-product-name="{{ product.name }}"
+                           data-product-price="{% if discount_amount > 0 %}{{ discounted_price }}{% else %}{{ product.price }}{% endif %}">
+                           <b><i class="fa fa-cart-plus"></i> Thêm vào giỏ hàng</b>
+                            <p>Giao trong 1 giờ hoặc nhận tại cửa hàng</p>
+                        </a>
+                    </div>
+                                        
+                </div>
+                <div class="info_product">
+                    <h2>Thông số kỹ thuật</h2>
+                    <ul class="info">
+                        <li>
+                            <p>Màn hình</p>
+                            <div>{{ product.screen }}</div>
+                        </li>
+                        <li>
+                            <p>Hệ điều hành</p>
+                            <div>{{ product.os }}</div>
+                        </li>
+                        <li>
+                            <p>Camera </p>
+                            <div>{{ product.camera }}</div>
+                        </li>
+                        <li>
+                            <p>CPU</p>
+                            <div>{{ product.cpu }}</div>
+                        </li>
+                        <li>
+                            <p>RAM</p>
+                            <div>{{ product.ram }}</div>
+                        </li>
+                        <li>
+                            <p>Bộ nhớ trong</p>
+                            <div>{{ product.storage }}</div>
+                        </li>
+                        <li>
+                            <p>Dung lượng pin</p>
+                            <div>{{ product.battery }}</div>
+                        </li>
+                        <li>
+                            <p>Hệ điều hành</p>
+                            <div>{{ product.os }}</div>
+                        </li>
+                        <li>
+                            <p>Tính năng</p>
+                            <div>{{ product.features }}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <!-- Review Area -->
+    <div class="container mt">
+        <div class="row">
+            <!-- Review List -->
+            <div class="col-md-4">
+                <h3>Đánh giá sản phẩm</h3>
+                <div id="danhGiaSanPham" class="review-list">
+                    {% for review in reviews %}
+                    <div class="review">
+                        <div class="review-header">
+                            <span class="review-author">{{ review.user.username }}</span>
+                            <span class="review-date">{{ review.rating_date.strftime('%Y-%m-%d') }}</span>
+                        </div>
+                        <div class="review-rating">
+                            {{ review.score|star_rating|safe }}
+                        </div>
+                        <div class="review-comment">
+                            <p>{{ review.comment }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+    
+            <!-- Review Submission Form -->
+            <div class="col-md-8">
+                <h5>Viết đánh giá</h5>
+                <form id="reviewForm" class="pt-3">
+                    <input type="hidden" id="product-id" value="{{ product.id }}">
+                    <div class="form-group">
+                        <label for="rating">Rating:</label>
+                        <select class="form-control" id="rating" name="rating">
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+        <div id="goiYSanPham">
+            <div class="khungSanPham" style="border-color: #434aa8">
+                <h3 class="tenKhung" style="background-image: linear-gradient(120deg, #434aa8 0%, #ec1f1f 50%, #434aa8 100%);">
+                    * Bạn có thể thích *
+                </h3>
+                <div class="listSpTrongKhung flexContain">
+                    {% for item in recommended_product_data %}
+                        <li class="sanPham">
+                            <a href="{{ url_for('product_detail', product_id=item.product.id) }}">
+                                <div class="imgContainer">
+                                    <img src="{{ item.product.images[0].url if item.product.images else 'url_to_default_image' }}" alt="{{ item.product.name }}">
+                                </div>
+                                <h3>{{ item.product.name }}</h3>
+                                <div class="price">
+                                    <strong>{{ item.product.price | format_currency }} đ</strong>
+                                </div>
+                                <div class="ratingresult">
+                                    {{ item.avg_rating|star_rating(item.review_count)|safe }}
+                                </div>
+                                <div class="tooltip">
+                                    <button class="themvaogio" onclick="addToCart(this)" data-id="123" data-name="Sản phẩm A" data-price="299000">
+                                        <span class="tooltiptext" style="font-size: 15px;">Thêm vào giỏ</span>
+                                        +
+                                    </button>                                                            
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>    
+    </section>
+    <div class="footer"><script>addFooter();</script></div>
+
+</body>
+
+</html>

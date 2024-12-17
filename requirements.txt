@@ -1,0 +1,10 @@
+flask
+mysql-connector-python
+flask_wtf
+flask_migrate
+mysqlclient
+email_validator
+flask_login
+sqlalchemy==2.0.2
+pymysql
+numpy==1.26.4

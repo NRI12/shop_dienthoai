@@ -1,0 +1,75 @@
+<section>
+
+{% include 'header.html' %}
+
+<div class="container mt-5">
+<div class="card">
+	<div class="card-header bg-primary text-white">
+		<h4>Giỏ hàng của bạn</h4>
+	</div>
+	<div class="card-body">
+		<table class="table table-hover">
+			<thead class="thead-dark">
+				<tr>
+					<th scope="col">STT</th>
+					<th scope="col">Sản phẩm</th>
+					<th scope="col">Giá</th>
+					<th scope="col">Số lượng</th>
+					<th scope="col">Thành tiền</th>
+					<th scope="col">Thời gian</th>
+					<th scope="col">Xóa</th>
+				</tr>
+			</thead>
+			<tbody id="cartTableBody">
+				<tr>
+					<td colspan="7">
+						<h1 class="text-success text-center py-4">
+							Giỏ hàng trống !!
+						</h1>
+					</td>
+				</tr>
+				<!-- Các hàng sản phẩm sẽ được thêm vào đây -->
+			</tbody>			
+		</table>
+		<div class="text-right">
+			<h4 id="totalAmount"></h4>
+			<button class="btn btn-success" onclick="showPaymentOptions()">Thanh toán</button>
+		</div>
+	</div>
+</div>
+<div id="paymentPanel" class="card mt-5" style="display:none;">
+	<div class="card-header bg-primary text-white">
+		<h4>Thông tin thanh toán</h4>
+	</div>
+	<div class="card-body">
+		<form id="paymentForm" onsubmit="submitPayment(event)">
+			<div class="form-group">
+				<label for="fullName">Họ tên:</label>
+				<input type="text" class="form-control" id="fullName" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" class="form-control" id="email" required>
+			</div>
+			<div class="form-group">
+				<label for="address">Địa chỉ:</label>
+				<input type="text" class="form-control" id="address" required>
+			</div>
+			<div class="form-group">
+				<label for="phoneNumber">Số điện thoại:</label>
+				<input type="text" class="form-control" id="phoneNumber" required>
+			</div>
+			<div class="form-group">
+				<label for="paymentMethod">Phương thức thanh toán:</label>
+				<select class="form-control" id="paymentMethod" required>
+					<option value="cash">Thanh toán khi nhận hàng</option>
+					<option value="paypal">Thanh toán qua PayPal</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+		</form>
+	</div>
+</div>
+
+
+</section>

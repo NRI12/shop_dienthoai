@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin - Thế giới điện thoại</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/style.css') }}">
+</head>a
+<body>
+    <header>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-md-2 sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-title">MENU</li>
+                    <li class="nav-item"><a class="nav-link active" href="#" id="homeLink"><i class="fa fa-home"></i> Trang Chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="productLink"><i class="fa fa-th-large"></i> Sản Phẩm</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="orderLink"><i class="fa fa-file-text-o"></i> Đơn Hàng</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="customerLink"><i class="fa fa-address-book-o"></i> Khách Hàng</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" id="reviewLink"><i class="fa fa-comments-o"></i> Đánh Giá</a></li>
+                    <li class="nav-item">
+                        <hr>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout" class="nav-link" onclick="logOutAdmin(); return true;">
+                            <i class="fa fa-arrow-left"></i>
+                            Đăng xuất (về Trang chủ)
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <div class="col-md-10 main">
+                <div id="homeContent">
+                    <h2>Trang Chủ Admin</h2>
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3 id="newOrdersCount">0</h3>
+                                    <p>Số người dùng đặt đơn mới</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-shopping-bag"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3 id="percentChange">0<sup style="font-size: 20px">%</sup></h3>
+                                    <p>Tổng số sản phẩm tồn kho</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-bar-chart"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3 id="userRegistrationsCount">0</h3>
+                                    <p>Số lượng người dùng</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-user-plus"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3 id="totalSalesValue">0</h3>
+                                    <p>Doanh thu</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-dollar"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="productContent" style="display: none;">
+                    <h2>Danh sách sản phẩm</h2>
+                    <a href="#" class="btn btn-primary mb-3" onclick="showAddProductModal()">Thêm sản phẩm</a>
+                    <div class="table-content">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên</th>
+                                    <th>Mô tả</th>
+                                    <th>Giá</th>
+                                    <th>Tồn kho</th>
+                                    <th>Khuyến mãi</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productTableBody">
+                                <!-- Dữ liệu sản phẩm sẽ được thêm động ở đây -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <select name="kieuTimSanPham">
+                            <option value="ma">Tìm theo mã</option>
+                            <option value="ten">Tìm theo tên</option>
+                        </select>
+                        <input type="text" placeholder="Tìm kiếm..." onkeyup="timKiemSanPham(this)">
+                    </div>
+                </div>
+                <div id="orderContent" style="display: none;">
+                    <h2>Danh sách đơn hàng</h2>
+                    <div class="table-content">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Khách hàng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orderTableBody">
+                                <!-- Dữ liệu đơn hàng sẽ được thêm động ở đây -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="customerContent" style="display: none;">
+                    <h2>Danh sách khách hàng</h2>
+                    <a href="#" class="btn btn-primary mb-3" onclick="showAddCustomerModal()">Thêm khách hàng</a>
+                    <div class="table-content">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Email</th>
+                                    <th>Tên đầy đủ</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Số đơn hàng</th>
+                                    <th>Tổng tiền đã chi</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customerTableBody">
+                                <!-- Dữ liệu khách hàng sẽ được thêm động ở đây -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="chartsContainer" class="row mt-4" style="display: none;">
+                    <div class="col-md-4">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                        <canvas id="orderChart"></canvas>
+                    </div>
+                    <div class="col-md-4">
+                        <canvas id="brandShareChart"></canvas>
+                    </div>
+                </div>
+                
+                <div id="topUsersContainer" class="row mt-4" style="display: none;">
+                    <div class="col-md-12">
+                        <h3>Top Người Dùng</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Số đơn hàng</th>
+                                    <th>Tổng chi tiêu (VND)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topUsersTableBody">
+                                <!-- Dữ liệu người dùng sẽ được thêm động ở đây -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="reviewContent" style="display: none;">
+                    <h2>Đánh giá sản phẩm</h2>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Người dùng</th>
+                                <th>Đánh Giá</th>
+                                <th>Cảm Xúc</th>
+                                <th>Độ Chính Xác Dự Đoán</th>  <!-- Thêm cột mới -->
+                            </tr>
+                        </thead>
+                        <tbody id="reviewsTableBody">
+                            <!-- Dữ liệu đánh giá sẽ được thêm động ở đây -->
+                        </tbody>
+                    </table>
+                    <div id="reviewPagination" class="pagination">
+                        <button onclick="changePage(-1)">Prev</button>
+                        <span id="pageNumber">1</span>
+                        <button onclick="changePage(1)">Next</button>
+                    </div> 
+                    <hr>
+                    <!-- Other content sections -->
+                    <div id="negativeReviewsContent" style="display: block;">  <!-- Change display to 'block' to show automatically -->
+                        <h2>Sản phẩm có tỷ lệ đánh giá tiêu cực cao</h2>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Tỷ lệ đánh giá tiêu cực</th>
+                                    <th>Actions</th>  <!-- Added column for actions -->
+                                </tr>
+                            </thead>
+                            <tbody id="negativeReviewsTableBody">
+                                <!-- Data will be dynamically added here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="negativeUsersContent" style="display: block;">
+                        <h2>Người dùng có tỷ lệ đánh giá tiêu cực cao</h2>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tên người dùng</th>
+                                    <th>Tổng số đánh giá</th>
+                                    <th>Số đánh giá tiêu cực</th>
+                                    <th>Tỷ lệ đánh giá tiêu cực</th>
+                                    <th>Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="negativeUsersTableBody">
+                                <!-- Dữ liệu sẽ được thêm động ở đây -->
+                            </tbody>
+                        </table>
+                    </div>                    
+                </div>        
+                
+            </div>
+        </div>
+    </div>
+    <div id="addProductModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addProductModalLabel">Thêm sản phẩm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addProductForm" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="addProductName">Tên</label>
+                            <input type="text" class="form-control" id="addProductName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductDescription">Mô tả</label>
+                            <textarea class="form-control" id="addProductDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductPrice">Giá</label>
+                            <input type="number" class="form-control" id="addProductPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductStock">Tồn kho</label>
+                            <input type="number" class="form-control" id="addProductStock" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductPromotion">Khuyến mãi</label>
+                            <input type="text" class="form-control" id="addProductPromotion">
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductScreen">Màn hình</label>
+                            <input type="text" class="form-control" id="addProductScreen">
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductCPU">CPU</label>
+                            <input type="text" class="form-control" id="addProductCPU">
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductRAM">RAM</label>
+                            <input type="text" class="form-control" id="addProductRAM">
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductStorage">Bộ nhớ trong</label>
+                            <input type="text" class="form-control" id="addProductStorage">
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductCamera">Camera</label>
+                            <input type="text" class="form-control" id="addProductCamera">
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductOS">Hệ điều hành</label>
+                            <input type="text" class="form-control" id="addProductOS">
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductFeatures">Tính năng</label>
+                            <textarea class="form-control" id="addProductFeatures"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductBattery">Pin</label>
+                            <input type="number" class="form-control" id="addProductBattery">
+                        </div>
+                        <div class="form-group">
+                            <label for="addProductImages">Hình ảnh</label>
+                            <input type="file" class="form-control" id="addProductImages" multiple required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="addCustomerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCustomerModalLabel">Thêm khách hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addCustomerForm">
+                        <div class="form-group">
+                            <label for="addCustomerUsername">Tên đăng nhập</label>
+                            <input type="text" class="form-control" id="addCustomerUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addCustomerEmail">Email</label>
+                            <input type="email" class="form-control" id="addCustomerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addCustomerPassword">Mật khẩu</label>
+                            <input type="password" class="form-control" id="addCustomerPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addCustomerFullName">Tên đầy đủ</label>
+                            <input type="text" class="form-control" id="addCustomerFullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="addCustomerBirthDate">Ngày sinh</label>
+                            <input type="date" class="form-control" id="addCustomerBirthDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="addCustomerAddress">Địa chỉ</label>
+                            <input type="text" class="form-control" id="addCustomerAddress">
+                        </div>
+                        <div class="form-group">
+                            <label for="addCustomerPhoneNumber">Số điện thoại</label>
+                            <input type="text" class="form-control" id="addCustomerPhoneNumber">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Thêm khách hàng</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <div id="editProductModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProductModalLabel">Sửa sản phẩm</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProductForm" enctype="multipart/form-data">
+                        <input type="hidden" id="editProductId">
+                        <div class="form-group">
+                            <label for="editProductName">Tên</label>
+                            <input type="text" class="form-control" id="editProductName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductDescription">Mô tả</label>
+                            <textarea class="form-control" id="editProductDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductPrice">Giá</label>
+                            <input type="number" class="form-control" id="editProductPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductStock">Tồn kho</label>
+                            <input type="number" class="form-control" id="editProductStock" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductPromotion">Khuyến mãi</label>
+                            <input type="text" class="form-control" id="editProductPromotion">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductScreen">Màn hình</label>
+                            <input type="text" class="form-control" id="editProductScreen">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductCPU">CPU</label>
+                            <input type="text" class="form-control" id="editProductCPU">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductRAM">RAM</label>
+                            <input type="text" class="form-control" id="editProductRAM">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductStorage">Bộ nhớ trong</label>
+                            <input type="text" class="form-control" id="editProductStorage">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductCamera">Camera</label>
+                            <input type="text" class="form-control" id="editProductCamera">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductOS">Hệ điều hành</label>
+                            <input type="text" class="form-control" id="editProductOS">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductFeatures">Tính năng</label>
+                            <textarea class="form-control" id="editProductFeatures"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductBattery">Pin</label>
+                            <input type="number" class="form-control" id="editProductBattery">
+                        </div>
+                        <div class="form-group">
+                            <label for="editProductImages">Hình ảnh</label>
+                            <input type="file" class="form-control" id="editProductImages" multiple>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="editOrderModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editOrderModalLabel">Sửa đơn hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editOrderForm">
+                        <input type="hidden" id="editOrderId">
+                        <div class="form-group">
+                            <label for="editOrderStatus">Trạng thái</label>
+                            <select class="form-control" id="editOrderStatus" required>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editOrderAddress">Địa chỉ</label>
+                            <input type="text" class="form-control" id="editOrderAddress" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="editCustomerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editCustomerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editCustomerModalLabel">Sửa khách hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editCustomerForm">
+                        <input type="hidden" id="editCustomerId">
+                        <div class="form-group">
+                            <label for="editCustomerUsername">Tên đăng nhập</label>
+                            <input type="text" class="form-control" id="editCustomerUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCustomerEmail">Email</label>
+                            <input type="email" class="form-control" id="editCustomerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCustomerFullName">Tên đầy đủ</label>
+                            <input type="text" class="form-control" id="editCustomerFullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editCustomerBirthDate">Ngày sinh</label>
+                            <input type="date" class="form-control" id="editCustomerBirthDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCustomerAddress">Địa chỉ</label>
+                            <input type="text" class="form-control" id="editCustomerAddress">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCustomerPhoneNumber">Số điện thoại</label>
+                            <input type="text" class="form-control" id="editCustomerPhoneNumber">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Thêm Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- Thêm Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <!-- Thêm Adapter cho Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.0/chartjs-adapter-moment.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+</body>
+</html>

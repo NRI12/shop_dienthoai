@@ -1,0 +1,185 @@
+<div class="top-nav group">
+	<section>
+		<div class="social-top-nav">
+			<a class="fa fa-facebook"></a>
+			<a class="fa fa-twitter"></a>
+			<a class="fa fa-google"></a>
+			<a class="fa fa-youtube"></a>
+		</div>
+
+		<ul class="top-nav-quicklink flexContain">
+			<li><a href="/home"><i class="fa fa-home"></i> Trang chủ</a></li>
+			<li><a href="/home"><i class="fa fa-newspaper-o"></i> Tin tức</a></li>
+			<li><a href="/home"><i class="fa fa-handshake-o"></i> Tuyển dụng</a></li>
+			<li><a href="/home"><i class="fa fa-info-circle"></i> Giới thiệu</a></li>
+			<li><a href="/home"><i class="fa fa-wrench"></i> Bảo hành</a></li>
+			<li><a href="/home"><i class="fa fa-phone"></i> Liên hệ</a></li>
+		</ul> 
+	</section>
+</div>
+<section>
+	{% include 'header.html' %}
+	<img src="{{ url_for('static', filename='img/banners/blackFriday.gif') }}" alt="" style="width: 100%;">
+	<br>
+	<div class="companyMenu group flexContain">
+		{% for company in companies %}
+		<img src="{{ url_for('static', filename='img/company/' + company) }}" alt="{{ company.split('.')[0] }}">
+		{% endfor %}
+	</div>
+	<hr>
+	<div class="khungSanPham">
+		<h3 class="tenKhung" style="background-image: linear-gradient(120deg, #4a90e2 0%, #a93de2 50%, #4a90e2 100%);">* SẢN PHẨM MỚI *</h3>
+		<div class="listSpTrongKhung flexContain">
+			{% for product_data in new_products %}
+			<li class="sanPham">
+				<a href="{{ url_for('product_detail', product_id=product_data.product.id) }}">
+					<div class="imgContainer">
+						<img src="{{ product_data.product.images[0].url if product_data.product.images else 'url_to_default_image' }}" alt="{{ product_data.product.name }}">
+						<label class="moiramat">Mới ra mắt</label>
+					</div>
+					<h3>{{ product_data.product.name }}</h3>
+					<div class="price">
+						{% if product_data.discount_amount > 0 %}
+							<span style="text-decoration: line-through;">{{ product_data.product.price | format_currency }} đ</span>
+							<strong>{{ (product_data.product.price - (product_data.discount_amount * product_data.product.price) / 100) | format_currency }} đ</strong>
+						{% else %}
+							<strong>{{ product_data.product.price | format_currency }} đ</strong>
+						{% endif %}
+					</div>
+					
+					<div class="ratingresult">
+						{{ product_data.avg_rating|star_rating(product_data.review_count)|safe }}
+					</div>
+					<div class="tooltip">
+						<button class="themvaogio" onclick="return false;">
+							<span class="tooltiptext" style="font-size: 15px;">Thêm vào giỏ</span>
+							+
+						</button>
+					</div>
+				</a>
+			</li>
+			{% endfor %}
+		</div>
+		<a class="xemTatCa" href="shop" style="border-left: 2px solid #42bcf4; border-right: 2px solid #42bcf4;">
+			Xem tất cả sản phẩm
+		</a>
+	</div>
+	<hr>
+	<div class="khungSanPham">
+		<h3 class="tenKhung" style="background-image: linear-gradient(120deg, #23374D 0%, #3E92CC 50%, #23374D 100%);">
+			* GIÁ SỐC ONLINE *
+		</h3>
+			<div class="listSpTrongKhung flexContain">
+			{% for product_data in discounted_products %}
+			<li class="sanPham">
+				<a href="{{ url_for('product_detail', product_id=product_data.product.id) }}">
+					<div class="imgContainer">
+						<img src="{{ product_data.product.images[0].url if product_data.product.images else 'url_to_default_image' }}" alt="{{ product_data.product.name }}">
+						<label class="giamgia">Giá rẻ online</label>
+					</div>
+					<h3>{{ product_data.product.name }}</h3>
+					<div class="price">
+						{% if product_data.discount_amount > 0 %}
+							<span style="text-decoration: line-through;">{{ product_data.product.price | format_currency }} đ</span>
+							<strong>{{ (product_data.product.price - (product_data.discount_amount * product_data.product.price) / 100) | format_currency }} đ</strong>
+						{% else %}
+							<strong>{{ product_data.product.price | format_currency }} đ</strong>
+						{% endif %}
+					</div>			
+					<div class="ratingresult">
+						{{ product_data.avg_rating|star_rating(product_data.review_count)|safe }}
+					</div>			
+					<div class="tooltip">
+						<button class="themvaogio" onclick="return false;">
+							<span class="tooltiptext" style="font-size: 15px;">Thêm vào giỏ</span>
+							+
+						</button>
+					</div>
+				</a>
+			</li>
+			{% endfor %}
+		</div>
+		<a class="xemTatCa" href="shop" style="border-left: 2px solid #42bcf4; border-right: 2px solid #42bcf4;">
+			Xem tất cả sản phẩm
+		</a>
+	</div>
+	<hr>
+	<div class="khungSanPham" style="border-color: #ff9c00">
+		<h3 class="tenKhung" style="background-image: linear-gradient(120deg, #ff9c00 0%, #ec1f1f 50%, #ff9c00 100%);">* GIẢM GIÁ LỚN *</h3>
+		<div class="listSpTrongKhung flexContain">
+			{% for item in big_discount_products  %}
+			<li class="sanPham">
+				<a href="{{ url_for('product_detail', product_id=item.product.id) }}">
+					<div class="imgContainer">
+						<img src="{{ item.product.images[0].url if item.product.images else 'url_to_default_image' }}" alt="{{ item.product.name }}">
+					</div>
+					<h3>{{ item.product.name }}</h3>
+					<div class="price">
+						{% if item.discount_amount > 0 %}
+							<span style="text-decoration: line-through;">{{ item.product.price | format_currency }} đ</span>
+							<strong>{{ (item.product.price - (item.discount_amount * item.product.price) / 100) | format_currency }} đ</strong>
+						{% else %}
+							<strong>{{ item.product.price | format_currency }} đ</strong>
+						{% endif %}
+					</div>						
+					<div class="ratingresult">
+						{{ item.avg_rating|star_rating(item.review_count)|safe }}
+					</div>
+					<label class="giamgia">
+						<i class="fa fa-bolt"></i> Giảm {{ item.discount_amount }}%
+					</label>
+					<div class="tooltip">
+						<button class="themvaogio" onclick="return false;">
+							<span class="tooltiptext" style="font-size: 15px;">Thêm vào giỏ</span>
+							+
+						</button>
+					</div>
+				</a>
+			</li>
+			{% endfor %}
+		</div>
+		<a class="xemTatCa" href="shop" style="border-left: 2px solid #ff9c00; border-right: 2px solid #ff9c00;">
+			Xem tất cả sản phẩm
+		</a>
+	</div>
+	<hr>
+	<div class="khungSanPham" style="border-color: #ff9c00">
+		<h3 class="tenKhung" style="background-image: linear-gradient(120deg, #007BFF 0%, #28A745 50%, #007BFF 100%);">
+			* GIÁ RẺ CHO MỌI NHÀ *
+		</h3>
+					
+		<div class="listSpTrongKhung flexContain">
+			{% for item in cheaps_products  %}
+			<li class="sanPham">
+				<a href="{{ url_for('product_detail', product_id=item.product.id) }}">
+					<div class="imgContainer">
+						<img src="{{ item.product.images[0].url if item.product.images else 'url_to_default_image' }}" alt="{{ item.product.name }}">
+					</div>
+					<h3>{{ item.product.name }}</h3>
+					<div class="price">
+						{% if item.discount_amount > 0 %}
+							<span style="text-decoration: line-through;">{{ item.product.price | format_currency }} đ</span>
+							<strong>{{ (item.product.price - (item.discount_amount * item.product.price) / 100) | format_currency }} đ</strong>
+						{% else %}
+							<strong>{{ item.product.price | format_currency }} đ</strong>
+						{% endif %}
+					</div>
+					<div class="ratingresult">
+						{{ item.avg_rating|star_rating(item.review_count)|safe }}
+					</div>
+					<div class="tooltip">
+						<button class="themvaogio" onclick="return false;">
+							<span class="tooltiptext" style="font-size: 15px;">Thêm vào giỏ</span>
+							+
+						</button>
+					</div>
+				</a>
+			</li>
+			{% endfor %}
+		</div>
+		<a class="xemTatCa" href="shop" style="border-left: 2px solid #ff9c00; border-right: 2px solid #ff9c00;">
+			Xem tất cả sản phẩm
+		</a>
+	</div>
+	<hr>
+</div>

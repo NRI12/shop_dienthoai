@@ -1,0 +1,600 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body,
+html {
+    min-width: 1024px;
+
+}
+
+a {
+    text-decoration: none;
+    color: #222;
+}
+
+.clear {
+    clear: both;
+    line-height: 0;
+}
+
+/* căn giữa section, và set độ rộng lớn nhất là 1200px */
+section {
+    max-width: 1205px;
+    margin: 0 auto;
+}
+
+hr {
+    color: #ddd;
+    background-color: #ddd;
+    border-top: 1px solid #ddd;
+}
+
+.flexContain {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+/* Use for auto clear float */
+/* ====== https://css-tricks.com/snippets/css/clear-fix/ ======== */
+.group:before,
+.group:after {
+    content: "";
+    display: table;
+}
+
+.group:after {
+    clear: both;
+}
+
+.group {
+    zoom: 1;
+    /* For IE 6/7 (trigger hasLayout) */
+}
+
+/* =========   Alert ===============*/
+#alert {
+    z-index: 200; /* luôn trên cùng (đè lên những thứ khác) */
+    display: block;
+    position: fixed;
+    bottom: 40px;
+    right: 5px;
+    padding: 20px;
+    background-color: #111;
+    opacity: 0;
+    color: white;
+    font-weight: bold;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+#closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+/* ===== End clear float ====== */
+
+#goto-top-page {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 100;
+    background: rgba(0, 0, 0, .2);
+    color: #fff;
+    font-size: 18px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition-duration: .2s;
+}
+#goto-top-page:hover {
+    background: rgba(0, 0, 0, .7);
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+}
+
+/* ========= ScrollBar ============ */
+::-webkit-scrollbar {
+    width: .7em;
+    height: .7em;
+}
+
+::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #999;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bbb;
+}
+
+/* ==================== css thêm , chưa sử dụng ========================= */
+/* tooltip https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_copy_clipboard2 */
+.tooltip {
+    position: absolute;
+    display: inline-block;
+    bottom: 5px;
+    right: 5px;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 21;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* animation ping from thegioididong */
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #f33;
+    border-radius: 100%;
+    display: block;
+}
+
+.dot .ping {
+    border: 1px solid #f33;
+    width: 10px;
+    height: 10px;
+    opacity: 1;
+    background-color: rgba(238, 46, 36, .2);
+    border-radius: 100%;
+    -webkit-animation-duration: 1.25s;
+    animation-duration: 1.25s;
+    -webkit-animation-name: sonar;
+    animation-name: sonar;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    display: block;
+    margin: -1px 0 0 -1px;
+}
+
+@keyframes sonar {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1)
+    }
+
+    100% {
+        -webkit-transform: scale(3);
+        transform: scale(3);
+        opacity: 0
+    }
+}
+.modal-backdrop {
+    z-index: -1;
+  }
+
+  .modal-backdrop {
+    background-color: rgba(255, 255, 255, 0.5); 
+}
+.companyMenu {
+	margin: 10px 0 30px; 
+}
+
+.companyMenu a {
+    border: 2px solid #fff;
+    height: 40px;
+    line-height: 40px;
+    transition-duration: .2s;
+}
+
+.companyMenu a:hover {
+	border: 2px solid #aaa;
+	transform: scale(1.1);
+	z-index: 20;
+}
+
+.companyMenu a img{
+    max-height: 30px;
+    vertical-align: middle;
+    margin-top: -3px;
+}
+
+/* Dropdown From w3 */
+	.dropbtn {
+	    background-color: #444;
+	    color: white;
+	    padding: 10px 14px;
+	    font-size: 15px;
+	    border: none;
+	    border-radius: 5px;
+	    cursor: pointer;
+		margin-bottom: 5px;
+		transition-duration: .3s;
+	}
+	.dropbtn:after {
+		/* kí tự mũi tên > */
+	    content: ' \25B7';
+	}
+	.dropdown:hover .dropbtn:after{
+		/* kí tự mũi tên xuống */
+		content:' \25BD'
+	}
+	.dropdown {
+	    position: relative;
+	    margin: 10px 5px;
+	}
+	.dropdown-content {
+	    z-index: 1;
+	    position: absolute;
+	    min-width: 170px;
+	    border-radius: 5px;
+	    background-color: rgba(255, 255, 255, .8);
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+		/* mặc địng là xoay 90 độ => bị ẩn đi */
+	    transform: rotateX(90deg);
+	    transition-duration: .3s;
+	}
+	.dropdown-content a {
+	    color: #444;
+	    padding: 12px 16px;
+	    text-decoration: none;
+	    display: block;
+	}
+	.dropdown-content a:hover { 
+		color: white;
+		background-color: #555 
+	}
+	.dropdown:hover .dropdown-content {
+	    /* khi hover vào thì cần hiện content ra => xoay 0 độ => trờ về như cũ */
+	    transform: rotateY(0deg);
+	}
+	.dropdown:hover .dropbtn {
+	    background-color: #3e8e41;
+	}
+/* ============== End From W3 ============== */
+
+/* Filter by Name */
+.filterName {
+	margin: 15px auto;
+	text-align: center;
+	/* width: 195px; */
+}
+.filterName input {
+	padding: 0 15px;
+	/* width: calc(100% - 30px); 15px la padding left cua input */
+	height: 30px;
+	border: 2px solid #bbb;
+	border-radius: 10px;
+	font-size: 15px;
+	-webkit-transition-duration: .3s;
+     -o-transition-duration: .3s;
+        transition-duration: .3s;
+}
+.filterName input:focus {
+	border: 2px solid orange;
+} 
+
+/* Choosed filter */
+.choosedFilter { margin: 10px auto; }
+.choosedFilter i { transition-duration: .3s; }
+.choosedFilter a:hover > h3 > i { color: red; }
+/* .choosedFilter a:hover > h3 { text-decoration: line-through; } */
+.choosedFilter a {
+    font-size: 12px;
+    padding: 6px;
+    color: #fff;
+    background: #288ad6;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+
+.khungSanPham {
+	width: 100%;
+	margin: 50px 0;
+	border-radius: 5px;
+	box-sizing: border-box; /* dùng để width ko vượt ra ngoài khi có border */
+}
+
+.khungSanPham h3.tenKhung {
+	line-height: 1.5em;
+	font-size: 1.5em;
+	text-align: center;
+	margin: 0 auto;
+	border-radius: 1em;
+	color: white;
+	transform: translateY(-0.75em);
+}
+
+.khungSanPham li {
+	list-style-type: none; 
+}
+
+/* Nút xem tất cả */
+.xemTatCa {
+	display: block;
+	font-weight: bold;
+	text-align: center;
+	/* max-width: 25%; */
+	margin:	0 auto;
+	padding: .5em 1em;
+	border-radius: 1em;
+	color: #888;
+	background-color: #eee;
+	transition-duration: .2s;
+	transform: translateY(1em);
+}
+.xemTatCa:hover {
+	background-color: #ccc;
+	color: #000;
+}
+.rating-stars {
+    color: gold; /* Màu vàng cho các sao */
+    font-size: 1.2em; /* Kích thước chữ lớn hơn một chút */
+}
+
+/* Top nav /////////////////////////////////////////////////*/
+/* Top Navigation */
+.top-nav {
+	display: inline-block;
+	background: #f1f1f1;
+	width: 100%;
+	border-bottom: 1px #e1e1e1 solid;
+}
+
+/* Social Icon */
+	.social-top-nav {
+		float: left;
+		display: table;
+	}
+	.social-top-nav a {
+		display: table-cell;
+		padding: 5px;
+		text-align: center;
+		font-size: 13px;
+		height: 2em;
+		width: 2em;
+		line-height: 2em;
+		color: gray;
+		background-color: #f1f1f1;
+		transition-duration: .2s;
+	}
+	/* hightlight icon fb, google, youtube .... when hover */
+	.social-top-nav a:hover { color: #fff; }
+	.fa-facebook:hover { background: #3B5998; }
+	.fa-twitter:hover { background: #55ACEE; }
+	.fa-google:hover { background: #dd4b39; }
+	.fa-youtube:hover { background: #bb0000; }
+/* ======= End Social Icon ======= */
+
+/* Quick link */
+	.top-nav-quicklink {
+		float: right;
+	}
+	.top-nav-quicklink li {
+		display: inline-block;
+		font-size: 1em;
+		color: gray;
+	}
+	.top-nav-quicklink li a {
+		display: block;
+		color: gray;
+		padding: 8px 15px;
+		transition-duration: .15s;
+	}
+	.top-nav-quicklink li a:hover {
+		padding-top: 4px; 
+		border-bottom: 4px solid #000;
+		color: #000;
+	}
+	.top-nav-quicklink li a:hover i {
+		color: Dodgerblue;
+	}
+/* ======= End quick link ======= */
+/* ======= End Top navigation ======= */
+
+/* https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy */
+.listSanPham {
+	margin: 50px auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* thêm border và padding cho th */
+.listSanPham th {
+    border: 1px solid #ddd;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+.listSanPham td {
+    border: 1px solid #ddd;
+}
+
+/* Đổi màu button khi hover vào tr */
+.listSanPham tr:hover td button {
+    background-color: rgb(176, 212, 177)
+}
+
+/* Canh giữa cho cột stt và th */
+.listSanPham tr td:first-child, .listSanPham tr th {
+	text-align: center;
+}
+
+/* những tr chẵn sẽ có màu khác */
+.listSanPham tr:nth-of-type(even) {background-color: #f2f2f2;}
+
+/* Dòng tổng tiền thanh toán sẽ có màu đậm hơn */
+.listSanPham tr:not(:last-child):hover {background-color: #e5e2e2;}
+
+/* Last child là dòng tổng tiền */
+.listSanPham tr:last-child { background-color: #aaa; }
+
+/* Số lượng */
+.listSanPham .soluong {
+    text-align: center;
+}
+.listSanPham .soluong button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: transparent; 
+}
+.listSanPham .soluong button:hover {
+    background-color: #4CAF50; 
+}
+.listSanPham .soluong input {
+    border: none;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    width: 5em;
+    height: 2em;
+}
+
+/* Link sản phẩm */
+.noPadding {
+    padding: 0 0 0 10px;
+    line-height: 2.5em;
+}
+.listSanPham td a {
+    display: block;
+    position: relative;
+    padding: 5px 0;
+}
+.listSanPham td a:hover {
+    text-decoration: underline;
+}
+
+/* Hình ảnh sản phẩm */
+.imgHide img {
+    position: absolute;
+    right: -130px;
+    width: 150px;
+    height: 0;
+    border-radius: 10px;
+    transition-duration: .1s;
+}
+.imgHide a:hover img {
+    height: 150px;
+}
+
+/* Cột Giá tiền canh lề phải */
+.alignRight {
+    text-align: right;
+    padding-right: 30px;  
+}
+
+
+
+/* Nút xóa */
+.fa-trash {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    color: #999;
+    cursor: pointer;
+    transition-duration: .2s;
+}
+
+.fa-trash:hover {
+    color: red;
+    transform: scale(1.5)
+}
+
+/* Nút thanh toán */
+.thanhtoan {
+    font-size: 1.5em;
+    padding: 10px 15px;
+    font-weight: bold;
+    background-color: rgb(197, 223, 199);
+    cursor: pointer;
+    transition-duration: .2s;
+}
+.thanhtoan:hover {
+    background-color: #4CAF50; 
+}
+
+.xoaHet {
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+}
+.xoaHet:hover {
+    background-color: rgb(224, 65, 65);
+}
+.review-list {
+    max-height: 400px; /* Set the maximum height */
+    overflow-y: auto;  /* Add vertical scrollbar */
+}
+.review {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+.review-header {
+    font-weight: bold;
+}
+.review-rating {
+    color: #ffc107;
+}
+.review-comment {
+    margin-top: 5px;
+}

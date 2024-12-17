@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thế giới điện thoại</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" crossorigin="anonymous">
+	<link rel="stylesheet" href="{{ url_for('static', filename='js/owlcarousel/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/owlcarousel/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topnav.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/banner.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nguoidung.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/trangchu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home_products.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chitietsanpham.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pagination_phantrang.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/owlcarousel/owl.carousel.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+    <div class="header group">
+        <div class="logo">
+            <a href="/home">
+                <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="" style="width: 100%;">
+            </a>
+        </div>
+        <div class="content">
+            <div class="search-header" style="position: relative; left: 162px; top: 1px;">
+                <form class="input-search" method="get" action="index.html">
+                    <div class="autocomplete">
+                        <input id="search-box" name="search" autocomplete="off" type="text" placeholder="Nhập từ khóa tìm kiếm...">
+                        <button type="submit">
+                            <i class="fa fa-search"></i>
+                            Tìm kiếm
+                        </button>
+                    </div>
+                </form> <!-- End Form search -->
+                <div class="tags">
+                    <strong>Từ khóa: </strong>
+                <a href="index.html?search=Samsung">Samsung</a><a href="index.html?search=iPhone">iPhone</a><a href="index.html?search=Huawei">Huawei</a><a href="index.html?search=Oppo">Oppo</a><a href="index.html?search=Mobi">Mobi</a></div>
+            </div>
+            <div class="tools-member">
+                <div class="member">
+                    <!-- Check if user is authenticated -->
+                    {% if current_user.is_authenticated %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-user"></i>
+                            {{ current_user.username }} <!-- Display the username -->
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="/user_profile" class="dropdown-item">Trang người dùng</a>
+                            <a href="{{ url_for('logout') }}" class="dropdown-item">Đăng xuất</a>
+                        </div>
+                    {% else %}
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-user"></i>
+                            Tài khoản
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a href="#" data-toggle="modal" data-target="#loginModal" class="dropdown-item">Đăng nhập/Đăng ký</a>
+                        </div>
+                        
+                    {% endif %}
+                </div> <!-- End Member -->
+                <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Đăng nhập/Đăng ký</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                 <!-- Hiển thị thông báo flash từ Flask -->
+                                 {% with messages = get_flashed_messages(with_categories=true) %}
+                                 {% if messages %}
+                                     {% for category, message in messages %}
+                                         <div class="alert alert-{{ category }}">{{ message }}</div>
+                                     {% endfor %}
+                                 {% endif %}
+                                 {% endwith %}
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#loginTab">Đăng nhập</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#registerTab">Đăng ký</a>
+                                    </li>
+                                </ul>
+            
+                                <!-- Tab Panes -->
+                                <div class="tab-content">
+                                    <div class="tab-pane container active" id="loginTab">
+                                        <!-- Login Form -->
+                                        <!-- Login Form inside Modal -->
+                                        <form id="loginForm" action="{{ url_for('login') }}" method="post">
+                                            <div class="form-group">
+                                                <label for="username">Tên đăng nhập:</label>
+                                                <input type="text" class="form-control" id="username" name="username" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="password">Mật khẩu:</label>
+                                                <input type="password" class="form-control" id="password" name="password" required>
+                                            </div>
+                                            <div id="loginErrorMessage" class="alert alert-danger" style="display: none;"></div>
+                                            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                                        </form>
+
+                                    </div>
+                                    <div class="tab-pane container fade" id="registerTab">
+                                        <!-- Registration Form -->
+                                        <!-- Registration Form inside Modal -->
+                                        <form id="registerForm" action="{{ url_for('register') }}" method="post">
+                                            <div class="form-group">
+                                                <label for="newUsername">Tên đăng nhập:</label>
+                                                <input type="text" class="form-control" id="newUsername" name="username" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="newEmail">Email:</label>
+                                                <input type="email" class="form-control" id="newEmail" name="email" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="fullname">Full Name:</label>
+                                                <input type="text" class="form-control" id="fullname" name="fullname" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="newPassword">Mật khẩu:</label>
+                                                <input type="password" class="form-control" id="newPassword" name="password" required>
+                                            </div>
+                                            <div id="registerErrorMessage" class="alert alert-danger" style="display: none;"></div>
+                                            <button type="submit" class="btn btn-primary">Đăng ký</button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Modal Footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Đóng</button>
+                            </div>
+            
+                        </div>
+                    </div>
+                </div>
+                <div class="cart">
+                    <a href="/giohang">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>Giỏ hàng</span>
+                        <span class="cart-number"></span>
+                    </a>
+                </div>
+                <!--<div class="check-order">
+                    <a>
+                        <i class="fa fa-truck"></i>
+                        <span>Đơn hàng</span>
+                    </a>
+                </div> -->
+            </div>
+        </div> 
+    </div>
+    <script type="text/javascript">
+        var loginUrl = "{{ url_for('login') }}";
+    </script>
+    <script type="text/javascript">
+        var registerUrl = "{{ url_for('register') }}";
+    </script>
+</body>
