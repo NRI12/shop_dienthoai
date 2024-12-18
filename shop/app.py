@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.DEBUG, filename='app.log', filemode='a',
 app = Flask(__name__)
 app.jinja_env.filters['star_rating'] = star_rating
 app.config['SECRET_KEY'] = 'your_secret_key_here'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@database-2.czia64cy4ba2.us-east-1.rds.amazonaws.com:3306/new_database'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password@localhost:3306/new_database'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
@@ -622,6 +622,7 @@ def get_reviews():
 
     reviews_data = [{'Review': review.comment, 'User': review.user.username} for review in reviews_pagination.items]
 
+    # Wrap in a structure that includes a 'reviews' key
     response = {
         'reviews': reviews_data,
         'has_more': reviews_pagination.has_next  # This can be used to manage pagination controls
@@ -629,6 +630,14 @@ def get_reviews():
     
     return jsonify(response)
 from sqlalchemy.orm import joinedload
+
+@app.route('/api/negative_reviews_summary', methods=['GET'])
+def negative_reviews_summary():
+    return None
+@app.route('/api/negative_review_users', methods=['GET'])
+def negative_review_users():
+    return None
+
 @app.route('/api/lock_user/<int:user_id>', methods=['POST'])
 def lock_user(user_id):
     user = User.query.get(user_id)

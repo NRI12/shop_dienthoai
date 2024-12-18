@@ -3,7 +3,6 @@ document.getElementById('homeLink').addEventListener('click', function () {
     document.getElementById('homeContent').style.display = 'block';
     document.getElementById('chartsContainer').style.display = 'flex'; // Hiển thị phần tử chứa biểu đồ
     document.getElementById('topUsersContainer').style.display = 'block'; // Hiển thị bảng top người dùng
-    document.getElementById('reviewContent').style.display = 'none'; // Ẩn bảng top người dùng
     loadDashboard();
 });
 document.addEventListener('DOMContentLoaded', function() {
@@ -20,7 +19,6 @@ document.getElementById('productLink').addEventListener('click', function () {
     document.getElementById('productContent').style.display = 'block';
     document.getElementById('chartsContainer').style.display = 'none'; // Ẩn phần tử chứa biểu đồ
     document.getElementById('topUsersContainer').style.display = 'none'; // Ẩn bảng top người dùng
-    document.getElementById('reviewContent').style.display = 'none'; // Ẩn bảng top người dùng
 
     loadProducts();
 });
@@ -30,7 +28,6 @@ document.getElementById('orderLink').addEventListener('click', function () {
     document.getElementById('orderContent').style.display = 'block';
     document.getElementById('chartsContainer').style.display = 'none'; // Ẩn phần tử chứa biểu đồ
     document.getElementById('topUsersContainer').style.display = 'none'; // Ẩn bảng top người dùng
-    document.getElementById('reviewContent').style.display = 'none'; // Ẩn bảng top người dùng
 
     loadOrders();
 });
@@ -40,25 +37,7 @@ document.getElementById('customerLink').addEventListener('click', function () {
     document.getElementById('customerContent').style.display = 'block';
     document.getElementById('chartsContainer').style.display = 'none'; // Ẩn phần tử chứa biểu đồ
     document.getElementById('topUsersContainer').style.display = 'none'; // Ẩn bảng top người dùng
-    document.getElementById('reviewContent').style.display = 'none'; // Ẩn bảng top người dùng
 
-    loadCustomers();
-});
-document.getElementById('reviewLink').addEventListener('click', function () {
-    hideAllContents();
-    document.getElementById('customerContent').style.display = 'block';
-    document.getElementById('chartsContainer').style.display = 'none'; // Ẩn phần tử chứa biểu đồ
-    document.getElementById('topUsersContainer').style.display = 'none'; // Ẩn bảng top người dùng
-    document.getElementById('reviewContent').style.display = 'none'; // Ẩn bảng top người dùng
-    loadCustomers();
-});
-
-document.getElementById('reviewLink').addEventListener('click', function () {
-    hideAllContents();
-    document.getElementById('customerContent').style.display = 'block';
-    document.getElementById('chartsContainer').style.display = 'none'; // Ẩn phần tử chứa biểu đồ
-    document.getElementById('topUsersContainer').style.display = 'none'; // Ẩn bảng top người dùng
-    document.getElementById('reviewContent').style.display = 'none'; // Ẩn bảng top người dùng
     loadCustomers();
 });
 function hideAllContents() {
@@ -68,7 +47,6 @@ function hideAllContents() {
     document.getElementById('customerContent').style.display = 'none';
     document.getElementById('chartsContainer').style.display = 'none'; // Ẩn phần tử chứa biểu đồ
     document.getElementById('topUsersContainer').style.display = 'none'; // Ẩn bảng top người dùng
-    document.getElementById('reviewContent').style.display = 'none'; // Ẩn bảng top người dùng
     
     // Hủy biểu đồ khi chuyển sang trang khác
     if (salesChart !== null && typeof salesChart.destroy === 'function') {
@@ -580,59 +558,6 @@ function deleteCustomer(customerId) {
             });
     }
 }
-document.getElementById('reviewLink').addEventListener('click', function() {
-    hideAllContents();
-    document.getElementById('reviewContent').style.display = 'block';
-
-    loadReviews(1); // Load trang đầu tiên khi click vào tab
-});
-
-function loadReviews(page) {
-    fetch(`/api/get_reviews?page=${page}`)
-        .then(response => response.json())
-        .then(data => {
-            const reviewsTableBody = document.getElementById('reviewsTableBody');
-            reviewsTableBody.innerHTML = ''; // Xóa nội dung cũ
-
-            // Handle case when 'reviews' key might be empty or undefined
-            if (data.reviews && data.reviews.length > 0) {
-                data.reviews.forEach(review => {
-                    const row = document.createElement('tr');
-                    const userCell = document.createElement('td');
-                    userCell.textContent = review.User;
-                    const reviewCell = document.createElement('td');
-                    reviewCell.textContent = review.Review;
-                    const emotionCell = document.createElement('td');
-                    emotionCell.textContent = review.prediction_label === 0 ? 'Tích cực' : 'Tiêu cực';
-                    const scoreCell = document.createElement('td');
-                    scoreCell.textContent = (review.prediction_score * 100).toFixed(2) + '%';
-                    row.appendChild(userCell);
-                    row.appendChild(reviewCell);
-                    row.appendChild(emotionCell);
-                    row.appendChild(scoreCell);
-                    reviewsTableBody.appendChild(row);
-                });
-            } else {
-                reviewsTableBody.innerHTML = '<tr><td colspan="4">No reviews available.</td></tr>';
-            }
-
-            // Update pagination controls if necessary
-            // E.g., update a 'Next' button visibility
-            // document.getElementById('nextButton').style.visibility = data.has_more ? 'visible' : 'hidden';
-
-            // Update current page display
-            document.getElementById('pageNumber').textContent = `Page ${page}`;
-        })
-        .catch(error => {
-            console.error('Error fetching reviews:', error);
-        });
-}
-
-let currentPage = 1;
-function changePage(direction) {
-    currentPage += direction;
-    loadReviews(currentPage);
-}
 function deleteProduct(productId) {
     if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
         fetch(`/api/products/${productId}`, {
@@ -650,97 +575,4 @@ function deleteProduct(productId) {
     }
 }
 
-function loadNegativeReviewsSummary() {
-    fetch('/api/negative_reviews_summary')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const negativeReviewsTableBody = document.getElementById('negativeReviewsTableBody');
-            negativeReviewsTableBody.innerHTML = '';
 
-            data.forEach(product => {
-                const row = document.createElement('tr');
-                const productNameCell = document.createElement('td');
-                productNameCell.textContent = product.ProductName;
-                const negativeRatioCell = document.createElement('td');
-                negativeRatioCell.textContent = product.NegativeReviewRatio + '%';
-                const actionsCell = document.createElement('td');
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.className = 'btn btn-danger';
-                deleteButton.onclick = function() { deleteProduct(product.ProductID); };  // Ensure ProductID is correctly referenced
-                actionsCell.appendChild(deleteButton);
-                row.appendChild(productNameCell);
-                row.appendChild(negativeRatioCell);
-                row.appendChild(actionsCell);
-                negativeReviewsTableBody.appendChild(row);
-            });
-        })
-        .catch(error => {
-            console.error('Error loading negative review summary:', error);
-            negativeReviewsTableBody.innerHTML = `<tr><td colspan="3">Failed to load data: ${error.message}</td></tr>`;
-        });
-}
-
-
-document.addEventListener('DOMContentLoaded', loadNegativeReviewsSummary);
-function lockUser(userId) {
-    if (confirm('Bạn có chắc chắn muốn thay đổi trạng thái khóa tài khoản của người dùng này?')) {
-        fetch(`/api/lock_user/${userId}`, {
-            method: 'POST',
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert('Error: ' + data.error);
-            } else {
-                alert(data.message);
-                loadNegativeUsersSummary();
-            }
-        });
-    }
-}
-
-function loadNegativeUsersSummary() {
-    fetch('/api/negative_review_users')
-        .then(response => response.json())
-        .then(data => {
-            const negativeUsersTableBody = document.getElementById('negativeUsersTableBody');
-            negativeUsersTableBody.innerHTML = '';
-
-            data.forEach(user => {
-                const row = document.createElement('tr');
-                const userNameCell = document.createElement('td');
-                userNameCell.textContent = user.UserName;
-                const totalCommentsCell = document.createElement('td');
-                totalCommentsCell.textContent = user.TotalComments;
-                const negativeCommentsCell = document.createElement('td');
-                negativeCommentsCell.textContent = user.NegativeComments;
-                const negativeRatioCell = document.createElement('td');
-                negativeRatioCell.textContent = user.NegativeCommentRatio + '%';
-                const actionsCell = document.createElement('td');
-                const lockButton = document.createElement('button');
-                lockButton.textContent = user.Locked ? 'Unlock' : 'Lock';
-                lockButton.className = user.Locked ? 'btn btn-success' : 'btn btn-danger';
-                lockButton.onclick = function() { lockUser(user.UserID); };
-                actionsCell.appendChild(lockButton);
-                row.appendChild(userNameCell);
-                row.appendChild(totalCommentsCell);
-                row.appendChild(negativeCommentsCell);
-                row.appendChild(negativeRatioCell);
-                row.appendChild(actionsCell);
-                negativeUsersTableBody.appendChild(row);
-            });
-        })
-        .catch(error => {
-            console.error('Error loading negative review users:', error);
-            const negativeUsersTableBody = document.getElementById('negativeUsersTableBody');
-            negativeUsersTableBody.innerHTML = `<tr><td colspan="5">Failed to load data: ${error.message}</td></tr>`;
-        });
-}
-
-document.addEventListener('DOMContentLoaded', loadNegativeUsersSummary);
